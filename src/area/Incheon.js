@@ -4,6 +4,7 @@ function Incheon({ fill, onClick, onMouseOver, onMouseLeave }) {
   return (
     <polyline
       id="인천"
+      className="area"
       onClick={onClick}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}

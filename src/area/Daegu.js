@@ -4,6 +4,7 @@ function Daegu({ fill, onClick, onMouseOver, onMouseLeave }) {
   return (
     <polyline
       id="대구"
+      className="area"
       onClick={onClick}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}

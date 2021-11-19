@@ -4,6 +4,7 @@ function Jeju({ fill, onClick, onMouseOver, onMouseLeave }) {
   return (
     <polyline
       id="제주"
+      className="area"
       onClick={onClick}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}

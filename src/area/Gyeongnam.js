@@ -4,6 +4,7 @@ function Gyeongnam({ fill, onClick, onMouseOver, onMouseLeave }) {
   return (
     <polyline
       id="경남"
+      className="area"
       onClick={onClick}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}

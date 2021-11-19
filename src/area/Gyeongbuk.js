@@ -4,6 +4,7 @@ function Gyeongbuk({ fill, onClick, onMouseOver, onMouseLeave }) {
   return (
     <polyline
       id="경북"
+      className="area"
       onClick={onClick}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}
