@@ -102,7 +102,7 @@ function CovidStatus({ area, date, level, num }) {
   return (
     <div>
       <h3>
-        {area}지역 코로나 현황({date} 기준)
+        {area} 코로나 현황({date} 기준)
       </h3>
       <p>거리두기 단계 : {level}</p>
       <p>확진자 수 : {num}</p>
@@ -112,6 +112,7 @@ function CovidStatus({ area, date, level, num }) {
 
 function CovidMap() {
   const [covidData, setCovidData] = useState(null); //초기값을 null로 설정해주지 않아서 useEffect안의 if문에서 null로 인식 못함..
+  let [allNum, setAllNum] = useState(0);
   const [info, setInfo] = useState({
     area: "",
     level: 0,
@@ -120,8 +121,14 @@ function CovidMap() {
 
   useEffect(() => {
     if (covidData !== null) {
-      //초기값이 null이므로 data가 저장되어있는지 확인.
       const data = covidData.data;
+
+      //뭔가 아닌거 같은데 원하는 결과가 나온 부분...
+      Object.keys(data).forEach(function (area) {
+        setAllNum((allNum += data[area].num));
+      });
+
+      setInfo({ area: "대한민국", level: "-", num: allNum });
     }
   }, [covidData]); //covidData값이 업데이트 될 때 마다 실행.
 
@@ -131,6 +138,7 @@ function CovidMap() {
   };
 
   // async await 를 사용하면 then, catch가 필요 없다
+
   // const fetchData = async () => {
   //   await axios
   //     .get("http://127.0.0.1:5000/covidData")
@@ -162,7 +170,7 @@ function CovidMap() {
       ) : (
         <>
           <CovidStatus
-            area={info.area}
+            area={info.area === "대한민국" ? info.area : info.area + "지역"}
             date={covidData.updated_date}
             level={info.level}
             num={info.num}
