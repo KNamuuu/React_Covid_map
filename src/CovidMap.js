@@ -102,7 +102,7 @@ function CovidStatus({ area, date, level, num }) {
   return (
     <div>
       <h3>
-        {area} 코로나 현황({date} 기준)
+        {area} 코로나 현황({date}시 기준)
       </h3>
       <p>거리두기 단계 : {level}</p>
       <p>확진자 수 : {num}</p>
@@ -118,6 +118,7 @@ function CovidMap() {
     level: 0,
     num: 0,
   });
+  let tmp = 0;
 
   useEffect(() => {
     if (covidData !== null) {
@@ -125,12 +126,19 @@ function CovidMap() {
 
       //뭔가 아닌거 같은데 원하는 결과가 나온 부분...
       Object.keys(data).forEach(function (area) {
-        setAllNum((allNum += data[area].num));
+        // setAllNum((allNum += data[area].num));
+        tmp += data[area].num;
+        console.log("forEach");
       });
 
+      setAllNum(tmp);
+      console.log("setAllNum");
+      console.log(`tmp : ${tmp} allNum : ${allNum}`);
+
       setInfo({ area: "대한민국", level: "-", num: allNum });
+      console.log("setInfo");
     }
-  }, [covidData]); //covidData값이 업데이트 될 때 마다 실행.
+  }, [covidData, allNum]); //covidData값이 업데이트 될 때 마다 실행.
 
   const fetchData = async () => {
     let response = await axios.get("http://127.0.0.1:5000/covidData");
